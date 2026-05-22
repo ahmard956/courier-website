@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -9,8 +8,9 @@ export default function App() {
   const searchShipment = async () => {
     try {
       const res = await axios.get(
-        `http://https://courier-website.onrender.com/api/shipments/${tracking}`
+        `https://courier-website.onrender.com/api/shipments/${tracking}`
       );
+
       setShipment(res.data);
     } catch (err) {
       alert('Shipment not found');
@@ -18,55 +18,60 @@ export default function App() {
   };
 
   return (
-    <div className="container">
-      <header>
-        <h1>FastTrack Courier Services</h1>
-        <p>Reliable Global Shipping Solutions</p>
-      </header>
+    <div style={{ padding: '40px', fontFamily: 'Arial' }}>
+      <h1>FastTrack Courier Services</h1>
 
-      <section className="tracking-box">
-        <h2>Track Your Shipment</h2>
+      <p>Reliable Global Shipping Solutions</p>
 
-        <input
-          type="text"
-          placeholder="Enter Tracking Number"
-          value={tracking}
-          onChange={(e) => setTracking(e.target.value)}
-        />
+      <input
+        type="text"
+        placeholder="Enter Tracking Number"
+        value={tracking}
+        onChange={(e) => setTracking(e.target.value)}
+        style={{
+          padding: '12px',
+          width: '300px',
+          marginRight: '10px'
+        }}
+      />
 
-        <button onClick={searchShipment}>Track Shipment</button>
+      <button
+        onClick={searchShipment}
+        style={{
+          padding: '12px 20px',
+          cursor: 'pointer'
+        }}
+      >
+        Track Shipment
+      </button>
 
-        {shipment && (
-          <div className="shipment-card">
-            <h3>Status: {shipment.status}</h3>
-            <p><strong>Sender:</strong> {shipment.sender}</p>
-            <p><strong>Receiver:</strong> {shipment.receiver}</p>
-            <p><strong>Origin:</strong> {shipment.origin}</p>
-            <p><strong>Destination:</strong> {shipment.destination}</p>
-          </div>
-        )}
-      </section>
+      {shipment && (
+        <div
+          style={{
+            marginTop: '30px',
+            padding: '20px',
+            border: '1px solid #ccc'
+          }}
+        >
+          <h2>Status: {shipment.status}</h2>
 
-      <section className="services">
-        <h2>Our Services</h2>
+          <p>
+            <strong>Sender:</strong> {shipment.sender}
+          </p>
 
-        <div className="service-grid">
-          <div className="card">
-            <h3>Worldwide Shipping</h3>
-            <p>Delivering parcels globally with speed.</p>
-          </div>
+          <p>
+            <strong>Receiver:</strong> {shipment.receiver}
+          </p>
 
-          <div className="card">
-            <h3>Express Delivery</h3>
-            <p>Same-day and next-day delivery available.</p>
-          </div>
+          <p>
+            <strong>Origin:</strong> {shipment.origin}
+          </p>
 
-          <div className="card">
-            <h3>Secure Packaging</h3>
-            <p>Your items are safe and protected.</p>
-          </div>
+          <p>
+            <strong>Destination:</strong> {shipment.destination}
+          </p>
         </div>
-      </section>
+      )}
     </div>
   );
 }
