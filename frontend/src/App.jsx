@@ -9,7 +9,7 @@ export default function App() {
   const searchShipment = async () => {
     try {
       const res = await axios.get(
-        `http://localhost:5000/api/shipments/${tracking}`
+        `http://https://courier-website.onrender.com/api/shipments/${tracking}`
       );
       setShipment(res.data);
     } catch (err) {
